@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-App</title>
+</head>
+<body>
+    <div>
+    <h1>TO-do-List</h1>
+    <input type="text" id="ipbox">
+    <button id="btn1" onclick="addITEM()">add</button>
+
+    <ul id="ul1">
+        <li> WALK FOR 30 MINS
+            <button id="btn2" onclick="Deleteitem(event)">Delete</button>
+
+        </li>
+    </ul>
+    </div>
+<script>
+    var ul1 = document.getElementById("ul1")
+    var ipbox = document.getElementById("ipbox")
+     // 🟢 Load saved tasks from localStorage
+     ul1.innerHTML = localStorage.getItem("myTasks") || "";
+    function addITEM(){
+        
+        if(ipbox.value.trim() === "") return; 
+        var litem = document.createElement("li")
+        litem.innerHTML = ipbox.value + "<button onclick = 'Deleteitem(event)'>Delete</button>"
+        ul1.append(litem)
+        
+        // Save list to localStorage
+        localStorage.setItem("myTasks", ul1.innerHTML);
+        ipbox.value = ""
+        
+
+    }
+
+    function Deleteitem(event){
+        event.target.parentElement.remove()
+         // Update localStorage after deleting
+        localStorage.setItem("myTasks", ul1.innerHTML);
+
+    }
+</script>
+</body>
+
+<STYLE>
+    BODY{
+        background: linear-gradient(135deg, #FDEB71, #F8D800);
+        opacity: 0.95;
+
+        color:#3F3F3F;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+     
+
+        
+    }
+    ul{
+        padding: 10px;
+        gap: 10PX;
+    }
+    div{
+        box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.44)
+;
+        background-color: #B0CE88;
+        width: 90%;
+        max-width: 600px;
+        height: auto;
+        margin: 70px;
+        padding: 30px;
+        border-radius:20px ;
+    }
+    h1{
+        color: #2E2E2E;
+    }
+    input{
+        width: 60%;
+        height: 30px;
+        border:  2px solid #3F3F3F;
+        border-radius: 5px;
+    }
+    button{
+        background-color: #F8D800 ;
+        color: #2E2E2E;
+        border: 2px solid #2E2E2E;
+        border-radius: 3px;
+        padding: 4px;
+        height: 40px;
+        width: 20%;
+        cursor: pointer;
+       
+
+    }
+    button.hover{
+        background-color: #FFD950;
+        
+        
+    }
+</STYLE>
+</html>
+
+
+<!--
+important note of loacl storage 
+
+localStorage.setItem("name", "Mathimalar");  // saves data
+localStorage.getItem("name");                // reads data
+localStorage.removeItem("name");             // deletes data
+
+
+
+-->
